@@ -34,6 +34,8 @@ class Menu:
         self.txt_repo = pygame.font.Font('res/font/ps2p.ttf', 11).render("github.com/dciets/Arcade-CS-Games", 0, (255, 255, 255))
         self.txt_ready = [pygame.font.Font('res/font/ps2p.ttf', 13).render("Ready!", 0, (255, 0, 0)), pygame.font.Font('res/font/ps2p.ttf', 13).render("Ready!", 0, (0, 0, 255))]
         self.txt_not_ready = [pygame.font.Font('res/font/ps2p.ttf', 13).render("Ready!", 0, (0, 0, 0)), pygame.font.Font('res/font/ps2p.ttf', 13).render("Ready!", 0, (0, 0, 0))]
+        self.txt_wet_mode = [pygame.font.Font('res/font/ps2p.ttf', 20).render("< Wet mode! >", 0, (255, 255, 0)), pygame.font.Font('res/font/ps2p.ttf', 20).render("< Wet mode! >", 0, (255, 255, 0))]
+        self.txt_dry_mode = [pygame.font.Font('res/font/ps2p.ttf', 20).render("< Dry mode! >", 0, (255, 255, 0)), pygame.font.Font('res/font/ps2p.ttf', 20).render("< Dry mode! >", 0, (255, 255, 0))]
 
         self.team_font = pygame.font.Font('res/font/ps2p.ttf', 30)
         self.txt_teams = [None, None]
@@ -69,6 +71,11 @@ class Menu:
         else:
             self.game.border.blit(self.txt_not_ready[index], self.txt_not_ready[index].get_rect(topleft=(index * 230 + 40, 190)))
 
+        if self.game.triggers[index]:
+            self.game.border.blit(self.txt_wet_mode[index], self.txt_wet_mode[index].get_rect(center=(x, y - 100)))
+        else:
+            self.game.border.blit(self.txt_dry_mode[index], self.txt_dry_mode[index].get_rect(center=(x, y - 100)))
+
     def show_top10(self):
         i = 1
         for school in list(sorted(self.schools_scores.iteritems(), key=operator.itemgetter(1), reverse=True)[:10]):
@@ -91,6 +98,8 @@ class Menu:
                 self.selections[index] = (self.selections[index] + 1) % len(self.schools)
                 self.refresh_team(index)
 
+            if event.key == input_map.PLAYERS_MAPPING[index][input_map.RIGHT] or event.key == input_map.PLAYERS_MAPPING[index][input_map.LEFT]:
+                self.game.triggers[index] = not self.game.triggers[index]
 
         if event.key == input_map.PLAYERS_MAPPING[index][input_map.ACTION]:
             self.players_is_ready[index] = not self.players_is_ready[index]
