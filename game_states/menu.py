@@ -32,8 +32,8 @@ class Menu:
 
         # Text
         self.txt_repo = pygame.font.Font('res/font/ps2p.ttf', 11).render("github.com/dciets/Arcade-CS-Games", 0, (255, 255, 255))
-        self.txt_ready = [pygame.font.Font('res/font/ps2p.ttf', 13).render("Ready!", 0, (255, 0, 0)), pygame.font.Font('res/font/ps2p.ttf', 13).render("Ready!", 0, (0, 0, 255))]
-        self.txt_not_ready = [pygame.font.Font('res/font/ps2p.ttf', 13).render("Ready!", 0, (0, 0, 0)), pygame.font.Font('res/font/ps2p.ttf', 13).render("Ready!", 0, (0, 0, 0))]
+        self.txt_ready = [pygame.font.Font('res/font/ps2p.ttf', 20).render("Ready!", 0, (255, 0, 0)), pygame.font.Font('res/font/ps2p.ttf', 20).render("Ready!", 0, (0, 0, 255))]
+        self.txt_not_ready = [pygame.font.Font('res/font/ps2p.ttf', 20).render("Ready!", 0, (0, 0, 0)), pygame.font.Font('res/font/ps2p.ttf', 20).render("Ready!", 0, (0, 0, 0))]
         self.txt_wet_mode = [pygame.font.Font('res/font/ps2p.ttf', 20).render("< Wet mode! >", 0, (255, 255, 0)), pygame.font.Font('res/font/ps2p.ttf', 20).render("< Wet mode! >", 0, (255, 255, 0))]
         self.txt_dry_mode = [pygame.font.Font('res/font/ps2p.ttf', 20).render("< Dry mode! >", 0, (255, 255, 0)), pygame.font.Font('res/font/ps2p.ttf', 20).render("< Dry mode! >", 0, (255, 255, 0))]
 
@@ -67,9 +67,9 @@ class Menu:
         self.game.border.blit(self.txt_teams[index], self.txt_teams[index].get_rect(center=(x, y)))
 
         if self.players_is_ready[index]:
-            self.game.border.blit(self.txt_ready[index], self.txt_ready[index].get_rect(topleft=(index * 230 + 40, 190)))
+            self.game.border.blit(self.txt_ready[index], self.txt_ready[index].get_rect(center=(x, y + 100)))
         else:
-            self.game.border.blit(self.txt_not_ready[index], self.txt_not_ready[index].get_rect(topleft=(index * 230 + 40, 190)))
+            self.game.border.blit(self.txt_not_ready[index], self.txt_not_ready[index].get_rect(center=(x, y + 100)))
 
         if self.game.triggers[index]:
             self.game.border.blit(self.txt_wet_mode[index], self.txt_wet_mode[index].get_rect(center=(x, y - 100)))
